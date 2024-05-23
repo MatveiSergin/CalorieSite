@@ -34,7 +34,6 @@ class Product(Base):
         if self.dictionary:
             return self.dictionary
 
-        self.dictionary["id"] = self.id
         self.dictionary["name"] = self.name
         self.dictionary["proteins"] = self.proteins
         self.dictionary["fats"] = self.fats

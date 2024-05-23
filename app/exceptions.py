@@ -5,3 +5,8 @@ class BaseException(Exception):
 class SerializerException(BaseException):
     pass
 
+class ApiException(BaseException):
+    pass
+
+class NotConvertToJsonException(BaseException):
+    pass
