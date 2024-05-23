@@ -13,8 +13,9 @@ def calculate_calorie():
 @app.get('/api/products/<string:product_name>') #http://127.0.0.1:5000/api/products
 def all_calorie(product_name):
     translator = googletrans.Translator()
-    if translator.detect(product_name).lang == 'ru':
-        en_product_name = translator.translate(product_name, src='ru', dest='en').text
+    source_lang = translator.detect(product_name).lang
+    if source_lang != 'en':
+        en_product_name = translator.translate(product_name, src=source_lang, dest='en').text
     else:
         en_product_name = product_name
     api = ProductsApi()

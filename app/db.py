@@ -1,4 +1,4 @@
-from sqlalchemy import URL, create_engine, Column, String, Integer
+from sqlalchemy import URL, create_engine, Column, String, Float
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from dotenv import load_dotenv
 from os import getenv
@@ -23,12 +23,12 @@ class Base(DeclarativeBase):
 class Product(Base):
     __tablename__ = "Product"
 
-    id = Column(Integer, autoincrement='auto', primary_key=True)
+    id = Column(Float, autoincrement='auto', primary_key=True)
     name = Column(String, nullable=False)
-    proteins = Column(Integer, nullable=False)
-    fats = Column(Integer, nullable=False)
-    carbohydrates = Column(Integer, nullable=False)
-    calories = Column(Integer,  nullable=False)
+    proteins = Column(Float, nullable=False)
+    fats = Column(Float, nullable=False)
+    carbohydrates = Column(Float, nullable=False)
+    calories = Column(Float,  nullable=False)
     dictionary = {}
     def to_dict(self):
         if self.dictionary:
