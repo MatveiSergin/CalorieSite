@@ -1,10 +1,11 @@
 import googletrans
-from flask import Flask, render_template
+from flask import render_template
+
+from app.wsgi import app
 from db import session, Product
 from serializers import ProductsSerializer
 from api import ProductsApi
 
-app = Flask(__name__)
 
 @app.route('/')
 def calculate_calorie():
@@ -32,6 +33,3 @@ def all_calorie(product_name):
             response = serializer.encode(db_product[0])
             return response
         return 'No product found'
-
-if __name__ == '__main__':
-    app.run(use_reloader=False)
