@@ -5,21 +5,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python app.py
+    command: gunicorn -b 127.0.0.1:5000 app.wsgi:app
     volumes:
-      - ./services/web/:/usr/src/app/
+      - .:/usr/src/app/
     ports:
       - 5001:5000
     env_file:
-      - ./.env
+      - .env
     depends_on:
       - db
   db:
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
 volumes:

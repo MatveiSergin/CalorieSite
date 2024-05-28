@@ -1,11 +1,11 @@
 import googletrans
 from flask import render_template
-
-from app.wsgi import app
 from db import session, Product
 from serializers import ProductsSerializer
 from api import ProductsApi
+from flask import Flask
 
+app = Flask(__name__)
 
 @app.route('/')
 def calculate_calorie():

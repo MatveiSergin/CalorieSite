@@ -1,4 +1,4 @@
-FROM python:3.11.3-slim-buster
+FROM python:3.12.3-bookworm
 
 # set work directory
 WORKDIR /usr/src/app
@@ -13,5 +13,3 @@ COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 # copy project
 COPY . /usr/src/app/
-EXPOSE 5000
-CMD["gunicorn", "-b", "0.0.0.0:5000", "wsgi:app"]
