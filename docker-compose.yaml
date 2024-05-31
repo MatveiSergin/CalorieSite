@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn -b 0.0.0.0:5000 app.wsgi:app
+    command: gunicorn -b 0.0.0.0:5000 flaskr.wsgi:app
     volumes:
-      - .:/usr/src/app/
+      - .:/usr/src/flaskr/
     ports:
       - 5001:5000
     env_file:

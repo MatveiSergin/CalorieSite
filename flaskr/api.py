@@ -1,6 +1,6 @@
 import requests
 import os
-from app.exceptions import ApiException
+from flaskr.exceptions import ApiException
 from dotenv import load_dotenv
 
 load_dotenv()

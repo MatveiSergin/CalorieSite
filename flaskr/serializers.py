@@ -2,8 +2,8 @@ import json
 
 import googletrans
 
-from app.exceptions import SerializerException, NotConvertToJsonException
-from app.db import Product
+from flaskr.exceptions import SerializerException, NotConvertToJsonException
+from flaskr.db import Product
 
 class ProductsSerializer:
     def validate(self, products, many):

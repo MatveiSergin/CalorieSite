@@ -1,8 +1,8 @@
 import googletrans
 from flask import render_template
-from app.db import session, Product
-from app.serializers import ProductsSerializer
-from app.api import ProductsApi
+from flaskr.db import session, Product
+from flaskr.serializers import ProductsSerializer
+from flaskr.api import ProductsApi
 from flask import Flask
 from flask_cors import CORS
 
