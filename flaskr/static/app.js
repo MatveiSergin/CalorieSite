@@ -26,77 +26,75 @@ function appCalculateCalorie(elemId) {
 
 
 function calculateCPFC(wrapperDiv, textField, option, rowCount) {
-    const numberInputs = wrapperDiv.querySelectorAll('input[type="number"]');
+    const input = wrapperDiv.querySelector(`#weight${rowCount}`);
 
-    numberInputs.forEach(input => {
-        input.addEventListener('input', function(event) {
-            const parentRow = input.closest('tr');
+    input.addEventListener('input', function(event) {
+        const parentRow = input.closest('tr');
 
-            const dataTotal = {
-                mass: countingTotal('mass', rowCount),
-                protein: countingTotal('protein', rowCount),
-                fat: countingTotal('fat', rowCount),
-                carbohydrates: countingTotal('carbohydrates', rowCount),
-                calories: countingTotal('calories', rowCount)
-            }
+        const dataTotal = {
+            mass: countingTotal('mass', rowCount),
+            protein: countingTotal('protein', rowCount),
+            fat: countingTotal('fat', rowCount),
+            carbohydrates: countingTotal('carbohydrates', rowCount),
+            calories: countingTotal('calories', rowCount)
+        }
 
-            let value = parseFloat(event.target.value);
+        let value = parseFloat(event.target.value);
 
-            const protein = option.protein;
-            const fat = option.fat;
-            const carbohydrates = option.carbohydrates;
-            const calories = option.calories;
+        const protein = option.protein;
+        const fat = option.fat;
+        const carbohydrates = option.carbohydrates;
+        const calories = option.calories;
 
-            if (isNaN(value) || value < 0 || value > MAX_VALUE) {
-                value = 0;
-            }
+        if (isNaN(value) || value < 0 || value > MAX_VALUE) {
+            value = 0;
+        }
 
-            parentRow.querySelector('.tdProtein').textContent = (protein * (value / 100)).toFixed(2);
-            parentRow.querySelector('.tdFat').textContent = (fat * (value / 100)).toFixed(2);
-            parentRow.querySelector('.tdCarbohydrate').textContent = (carbohydrates * (value / 100)).toFixed(2);
-            parentRow.querySelector('.tdKcal').textContent = (calories * (value / 100)).toFixed(2);
+        parentRow.querySelector('.tdProtein').textContent = (protein * (value / 100)).toFixed(2);
+        parentRow.querySelector('.tdFat').textContent = (fat * (value / 100)).toFixed(2);
+        parentRow.querySelector('.tdCarbohydrate').textContent = (carbohydrates * (value / 100)).toFixed(2);
+        parentRow.querySelector('.tdKcal').textContent = (calories * (value / 100)).toFixed(2);
 
-            const totalMass = wrapperDiv.querySelector("#totalWeight");
-            const totalProtein = wrapperDiv.querySelector("#totalProtein");
-            const totalFat = wrapperDiv.querySelector("#totalFat");
-            const totalCarbohydrates = wrapperDiv.querySelector("#totalCarbohydrate");
-            const totalCalories = wrapperDiv.querySelector("#totalKcal");
+        const totalMass = wrapperDiv.querySelector("#totalWeight");
+        const totalProtein = wrapperDiv.querySelector("#totalProtein");
+        const totalFat = wrapperDiv.querySelector("#totalFat");
+        const totalCarbohydrates = wrapperDiv.querySelector("#totalCarbohydrate");
+        const totalCalories = wrapperDiv.querySelector("#totalKcal");
 
-            for (const key in dataTotal) {
-                if (!isNaN(dataTotal[key]) && dataTotal[key] > 0) {
-                    dataTotal[key] = parseFloat(dataTotal[key]).toFixed(2);
-                } else {
-                    dataTotal[key] = 0.00;
-                }
-
-                if (dataTotal[key] > MAX_VALUE) {
-                    dataTotal[key] = MAX_VALUE;
-                }
-            }
-
-            totalMass.innerHTML = dataTotal.mass;
-            totalProtein.innerHTML = dataTotal.protein;
-            totalFat.innerHTML = dataTotal.fat;
-            totalCarbohydrates.innerHTML = dataTotal.carbohydrates;
-            totalCalories.innerHTML = dataTotal.calories;
-
-            const protein100 = wrapperDiv.querySelector('#protein100');
-            const fat100 = wrapperDiv.querySelector('#fat100');
-            const carbohydrate100 = wrapperDiv.querySelector('#carbohydrate100');
-            const calories100 = wrapperDiv.querySelector('#kcal100');
-
-            if (dataTotal.mass) {
-                protein100.innerHTML = (dataTotal.protein * 100 / dataTotal.mass).toFixed(2);
-                fat100.innerHTML = (dataTotal.fat * 100 / dataTotal.mass).toFixed(2);
-                carbohydrate100.innerHTML = (dataTotal.carbohydrates * 100 / dataTotal.mass).toFixed(2);
-                calories100.innerHTML = (dataTotal.calories * 100 / dataTotal.mass).toFixed(2);
+        for (const key in dataTotal) {
+            if (!isNaN(dataTotal[key]) && dataTotal[key] > 0) {
+                dataTotal[key] = parseFloat(dataTotal[key]).toFixed(2);
             } else {
-                protein100.innerHTML = 0;
-                fat100.innerHTML = 0;
-                carbohydrate100.innerHTML = 0;
-                calories100.innerHTML = 0;
+                dataTotal[key] = 0.00;
             }
-        });
+
+            if (dataTotal[key] > MAX_VALUE) {
+                dataTotal[key] = MAX_VALUE;
+            }
+        }
+
+        totalMass.innerHTML = dataTotal.mass;
+        totalProtein.innerHTML = dataTotal.protein;
+        totalFat.innerHTML = dataTotal.fat;
+        totalCarbohydrates.innerHTML = dataTotal.carbohydrates;
+        totalCalories.innerHTML = dataTotal.calories;
+
+        const protein100 = wrapperDiv.querySelector('#protein100');
+        const fat100 = wrapperDiv.querySelector('#fat100');
+        const carbohydrate100 = wrapperDiv.querySelector('#carbohydrate100');
+        const calories100 = wrapperDiv.querySelector('#kcal100');
+
+        if (dataTotal.mass) {
+            protein100.innerHTML = (dataTotal.protein * 100 / dataTotal.mass).toFixed(2);
+            fat100.innerHTML = (dataTotal.fat * 100 / dataTotal.mass).toFixed(2);
+            carbohydrate100.innerHTML = (dataTotal.carbohydrates * 100 / dataTotal.mass).toFixed(2);
+            calories100.innerHTML = (dataTotal.calories * 100 / dataTotal.mass).toFixed(2);
+        } else {
+            protein100.innerHTML = 0;
+            fat100.innerHTML = 0;
+            carbohydrate100.innerHTML = 0;
+            calories100.innerHTML = 0;
+        }
     });
 }
 
@@ -133,7 +131,6 @@ function addEventListenerForNewRowInputText(wrapperDiv, id) {
     const textField = wrapperDiv.querySelector(`#product${id}`);
     const debouncedApiRequest = debounce(function() {
             apiRequest(textField.value).then(data => {
-                    console.log(textField.value, data);
                     calculateCPFC(wrapperDiv, textField, data, id);
                 });
         },
