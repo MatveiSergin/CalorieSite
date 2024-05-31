@@ -4,9 +4,10 @@ from db import session, Product
 from serializers import ProductsSerializer
 from api import ProductsApi
 from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True)
 @app.route('/')
 def calculate_calorie():
     return render_template('calculate_calorie.html')
