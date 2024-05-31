@@ -1,8 +1,8 @@
 import googletrans
 from flask import render_template
-from db import session, Product
-from serializers import ProductsSerializer
-from api import ProductsApi
+from app.db import session, Product
+from app.serializers import ProductsSerializer
+from app.api import ProductsApi
 from flask import Flask
 from flask_cors import CORS
 
@@ -34,3 +34,4 @@ def all_calorie(product_name):
             response = serializer.encode(db_product[0])
             return response
         return 'No product found'
+

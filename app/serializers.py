@@ -2,8 +2,8 @@ import json
 
 import googletrans
 
-from exceptions import SerializerException, NotConvertToJsonException
-from db import Product
+from app.exceptions import SerializerException, NotConvertToJsonException
+from app.db import Product
 
 class ProductsSerializer:
     def validate(self, products, many):
