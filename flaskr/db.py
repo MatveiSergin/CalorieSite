@@ -10,7 +10,8 @@ url_object = URL.create(
     username=getenv("USER_NAME"),
     password=getenv("PASSWORD"),
     host=getenv("HOST"),
-    database=getenv("DATABASE")
+    database=getenv("DATABASE"),
+    port=getenv("PORT")
 )
 
 engine = create_engine(url_object)
