@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
-@app.route('/')
+@app.route('/') #http://127.0.0.1:5000
 def calculate_calorie():
     return render_template('calculate_calorie.html')
 
