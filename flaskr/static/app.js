@@ -153,7 +153,7 @@ function debounce(callee, timeoutMs) {
 }
 
 function apiRequest(name) {
-    return fetch(`http://localhost:5001/api/products/${name}`).then(
+    return fetch(`https://localhost:5001/api/products/${name}`).then(
         data => {
             return data.json();
         });
